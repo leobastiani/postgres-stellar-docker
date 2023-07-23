@@ -26,3 +26,4 @@ jobs:
             --push \
             --platform linux/386,linux/amd64,linux/arm/v5 \
             .
+        timeout-minutes: 720
