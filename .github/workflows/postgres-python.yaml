@@ -1,3 +1,4 @@
+# had to rebuild because postgres:11 image was not able to do apt update
 name: docker build postgres-python
 
 on:
@@ -19,11 +20,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - run: git clone https://github.com/docker-library/postgres
+      - run: sed -i 's/FROM debian:bullseye-slim/FROM python:3.9-slim-bullseye/g' postgres/${{ matrix.version }}/bullseye/Dockerfile
       - run: |
           docker build \
             -t leobastiani/postgres-python:${{ matrix.version }}-3.9 \
-            --build-arg="FROM=leobastiani/postgres:${{ matrix.version }}" \
             --push \
             --platform linux/amd64,linux/arm64 \
             .
-        working-directory: ./postgres-python3.9
+        working-directory: ./postgres/${{ matrix.version }}/bullseye
