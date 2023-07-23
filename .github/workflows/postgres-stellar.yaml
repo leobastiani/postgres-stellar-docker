@@ -24,6 +24,6 @@ jobs:
             -t leobastiani/postgres-stellar:${{ matrix.version }} \
             --build-arg="FROM=leobastiani/postgres:${{ matrix.version }}" \
             --push \
-            --platform linux/386,linux/amd64,linux/arm/v5 \
+            --platform linux/amd64,linux/arm64 \
             .
         timeout-minutes: 720
