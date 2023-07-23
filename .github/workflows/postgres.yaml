@@ -26,4 +26,5 @@ jobs:
             -t leobastiani/postgres:${{ matrix.version }} \
             --push \
             --platform linux/386,linux/amd64,linux/arm/v5 \
-            postgres/${{ matrix.version }}/bullseye
+            .
+        working-directory: ./postgres/${{ matrix.version }}/bullseye
