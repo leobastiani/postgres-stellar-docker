@@ -21,8 +21,18 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: |
           docker build \
-            -t leobastiani/postgres-stellar:${{ matrix.version }} \
+            -t leobastiani/postgres-stellar:${{ matrix.version }}-draft \
             --build-arg="FROM=leobastiani/postgres:${{ matrix.version }}" \
-            --push \
             --platform linux/386,linux/amd64,linux/arm/v5 \
             .
+      - uses: kitabisa/docker-slim-action@v1
+        id: slim
+        env:
+          DSLIM_HTTP_PROBE: false
+        with:
+          target: leobastiani/postgres-stellar:${{ matrix.version }}-draft
+          tag: leobastiani/postgres-stellar:${{ matrix.version }}
+      - run: echo "${REPORT}"
+        env:
+          REPORT: ${{ steps.slim.outputs.report }}
+      - run: docker image push "leobastiani/postgres-stellar:${{ matrix.version }}"
