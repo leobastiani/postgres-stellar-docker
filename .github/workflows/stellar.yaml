@@ -1,7 +1,12 @@
 name: docker build stellar
 
 on:
+  workflow_dispatch:
   push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/stellar.yaml
 
 jobs:
   build:
