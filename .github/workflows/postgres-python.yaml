@@ -1,7 +1,7 @@
-name: docker build postgres-stellar
+name: docker build postgres-python
 
 on:
-  push:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,9 +21,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: |
           docker build \
-            -t leobastiani/postgres-stellar:${{ matrix.version }} \
+            -t leobastiani/postgres-python:${{ matrix.version }}-3.9.17 \
             --build-arg="FROM=leobastiani/postgres:${{ matrix.version }}" \
             --push \
-            --platform linux/amd64,linux/arm64 \
+            --platform linux/386,linux/amd64,linux/arm/v5,linux/arm64 \
             .
-        timeout-minutes: 720
+        working-directory: ./postgres-python3.9.17

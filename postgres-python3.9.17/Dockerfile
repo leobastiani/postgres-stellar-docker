@@ -28,5 +28,3 @@ RUN cd /root && \
   ./configure --enable-optimizations && make install && \
   cd / && \
   rm -rf /root/Python-3.9.17
-
-RUN pip3 install --no-cache-dir stellar psycopg2-binary SQLAlchemy==1.2.5 SQLAlchemy-Utils==0.33.1
