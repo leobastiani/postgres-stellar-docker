@@ -21,9 +21,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: |
           docker build \
-            -t leobastiani/postgres-python:${{ matrix.version }}-3.9.17 \
+            -t leobastiani/postgres-python:${{ matrix.version }}-3.9 \
             --build-arg="FROM=leobastiani/postgres:${{ matrix.version }}" \
             --push \
-            --platform linux/386,linux/amd64,linux/arm/v5,linux/arm64 \
+            --platform linux/386,linux/amd64,linux/arm/v5 \
             .
-        working-directory: ./postgres-python3.9.17
+        working-directory: ./postgres-python3.9
