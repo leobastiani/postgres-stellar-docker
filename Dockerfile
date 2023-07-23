@@ -10,3 +10,5 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --no-cache-dir stellar psycopg2-binary SQLAlchemy==1.2.5 SQLAlchemy-Utils==0.33.1
+
+CMD [ "stellar" ]
