@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        version: [11,12,13,14,15,16]
+        version: [11,12,13,14,15]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,6 +24,6 @@ jobs:
             -t leobastiani/postgres-python:${{ matrix.version }}-3.9 \
             --build-arg="FROM=leobastiani/postgres:${{ matrix.version }}" \
             --push \
-            --platform linux/386,linux/amd64,linux/arm/v5 \
+            --platform linux/amd64,linux/arm64 \
             .
         working-directory: ./postgres-python3.9
